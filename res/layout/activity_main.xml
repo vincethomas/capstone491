@@ -4,16 +4,39 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/scanButton"
+        android:layout_width="fill_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:text="Scan Barcode" />
+
+    <Button
+        android:id="@+id/upcButton"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/scanButton"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
-    
-    <EditText android:id="@+id/edit_message"
-        android:layout_width="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Scan UPC" />
+
+    <Button
+        android:id="@+id/profileButton"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:hint="@string/edit_message" />
+        android:layout_below="@+id/upcButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="Profile" />
+    
+    <Button
+        android:id="@+id/historyButton"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profileButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="History" />
 
 </RelativeLayout>

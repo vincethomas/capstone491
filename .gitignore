@@ -20,6 +20,9 @@ project.properties
 .classpath
 .DS_Store
 
+#buildpath
+*BuildConfig.java
+
 # more stuff
 */target
 target

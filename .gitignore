@@ -1,0 +1,41 @@
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+.classpath
+
+# generated files
+bin/
+gen/
+obj/
+
+# Local configuration file (sdk path, etc)
+local.properties
+project.properties
+.classpath
+.DS_Store
+
+# more stuff
+*/target
+target
+tmp
+*~
+bin
+*/test-output
+temp-testng-customsuite.xml
+**pom.xml.releaseBackup
+release.properties
+gen
+*/seed.txt
+notes
+logs
+gen-external-apklibs
+.idea
+*.iml
+.DS_Store
+*.swp

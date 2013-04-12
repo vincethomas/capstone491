@@ -1,13 +1,18 @@
 package com.example.allergyapp;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+
+import com.factual.driver.Factual;
 //import android.widget.Button;
 
 public class MainActivity extends Activity {
+	
+	private Factual factual = new Factual("","");
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +21,7 @@ public class MainActivity extends Activity {
 		//Button scanButton = (Button) findViewById(R.id.scanButton);
 		//scanButton.setOnClickListener(scanDatShit);
 		//IntentIntegrator.initiateScan(this);
+		Log.w("myApp", "no network");
 	}
 
 	@Override
@@ -34,6 +40,7 @@ public class MainActivity extends Activity {
    // };
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		Log.d("MyApp", "result method");
 	    switch(requestCode) {
 	        case IntentIntegrator.REQUEST_CODE: {
 	            if (resultCode != RESULT_CANCELED) {
@@ -43,6 +50,7 @@ public class MainActivity extends Activity {
 	                    
 	                    //put whatever you want to do with the code here
 	                    System.out.println("Success: " + upc);
+	                    Log.d("MyApp", "Success: " + upc);
 	                    
 	                }
 	            }

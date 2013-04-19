@@ -6,6 +6,6 @@
     <string name="menu_settings">Settings</string>
     
     <string name="edit_message">Enter a message</string>
-   
+    <string name="emptyResults">Empty</string>
 
 </resources>

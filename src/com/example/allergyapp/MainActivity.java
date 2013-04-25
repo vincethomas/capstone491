@@ -17,10 +17,6 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
-//import com.factual.driver.Factual;
-//import com.factual.driver.ReadResponse;
-//import android.widget.Button;
-
 public class MainActivity extends Activity {
 	
 	private final String OAUTH_KEY = "oQGYt52dXjhcfGJpq3QxufgRtNcNps0Kfa3DrpSk";
@@ -42,12 +38,9 @@ public class MainActivity extends Activity {
 	}
 	
 
-	//View.OnClickListener scanDatShit = new View.OnClickListener(){
     public void scanBarcode(View v) {
-    	//doesn't work, needs "Activity"
     	IntentIntegrator.initiateScan(this);
     }
-   // };
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Log.d("MyApp", "result method");
@@ -60,7 +53,7 @@ public class MainActivity extends Activity {
 	                    //
 	                    //put whatever you want to do with the code here
 	                    System.out.println("Success: " + upc);
-	                    Log.d("MyApp", "Success: " + upc);
+	                    Log.d("ALLERGY APP!!!!!!!!!", "Success: " + upc);
 	                    
 	                    resultText = (TextView) findViewById(R.id.resultText);
 	                    FactualRetrievalTask task = new FactualRetrievalTask();
@@ -80,7 +73,7 @@ public class MainActivity extends Activity {
 		protected List<ReadResponse> doInBackground(Query... params) {
 			List<ReadResponse> results = Lists.newArrayList();
 			for (Query q : params) {
-				results.add(factual.fetch("products-cpg-nutrition", q));
+				results.add(factual.fetch("products-cpg", q));
 			}
 			return results;
 		}
@@ -92,14 +85,16 @@ public class MainActivity extends Activity {
 		@Override
 		protected void onPostExecute(List<ReadResponse> responses) {
 			StringBuffer sb = new StringBuffer();
+			Log.d("TEST APPLICATION", "test1");
 			for (ReadResponse response : responses) {
+				Log.d("TEST APPLICATION", "test2");
 				for (Map<String, Object> product : response.getData()) {
-				String brand = (String) product.get("product_name");
-//				String address = (String) restaurant.get("address");
-//				String phone = (String) restaurant.get("tel");
-//				Number distance = (Number) restaurant.get("$distance");
-				sb.append(brand);
-				sb.append(System.getProperty("line.separator"));
+					Log.d("TEST APPLICATION", "test3");
+					String brand = (String) product.get("brand");
+	//				Number distance = (Number) restaurant.get("$distance");
+					sb.append("test: " + brand);
+					Log.d("TEST APPLICATION", brand);
+					sb.append(System.getProperty("line.separator"));
 				}  
 			}
 			resultText.setText(sb.toString());

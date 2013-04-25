@@ -64,8 +64,7 @@ public class MainActivity extends Activity {
 	                    
 	                    resultText = (TextView) findViewById(R.id.resultText);
 	                    FactualRetrievalTask task = new FactualRetrievalTask();
-	                    Query query = new Query().field("upc").isEqual(upc);
-	                    
+	                    Query query = new Query().search(upc);
 	                    task.execute(query);
 	                    
 	                }

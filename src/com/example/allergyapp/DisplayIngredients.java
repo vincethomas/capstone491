@@ -7,6 +7,7 @@ import com.factual.driver.Factual;
 import com.factual.driver.Query;
 import com.factual.driver.ReadResponse;
 import com.google.common.collect.Lists;
+import com.google.gson.Gson;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,7 +27,6 @@ public class DisplayIngredients extends Activity {
 	private final String OAUTH_KEY = "oQGYt52dXjhcfGJpq3QxufgRtNcNps0Kfa3DrpSk";
 	private final String OAUTH_SECRET = "4beHgBGuELmqEed765JVNGXMnOSZI6DdfFRRaSn1";
 	private Factual factual = new Factual(OAUTH_KEY,OAUTH_SECRET);
-	private TextView resultText = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +35,21 @@ public class DisplayIngredients extends Activity {
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
+		
+		
 		 Intent intent = getIntent();
 		 String upc = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+		 
+		 TextView myText = (TextView) findViewById(R.id.helloworld);
+		 myText.setText(upc);
 		
-		// Create the text view
-	    TextView textView = new TextView(this);
+		/*// Create the text view
+	    TextView textView = (TextView) findViewById(R.id.helloworld);
 	    textView.setTextSize(40);
 	    textView.setText(upc);
 
 	    // Set the text view as the activity layout
-	    setContentView(textView);
+	    setContentView(textView);*/
 	    
 	    //resultText = (TextView) findViewById(R.id.resultText);
         FactualRetrievalTask task = new FactualRetrievalTask();
@@ -102,7 +107,7 @@ public class DisplayIngredients extends Activity {
 
 		@Override
 		protected void onPostExecute(List<ReadResponse> responses) {
-			StringBuffer sb = new StringBuffer();
+			
 			for (ReadResponse response : responses) {
 				for (Map<String, Object> product : response.getData()) {
 				String brand = (String) product.get("product_name");
@@ -112,6 +117,13 @@ public class DisplayIngredients extends Activity {
 //				Number distance = (Number) restaurant.get("$distance");
 				//sb.append(brand);
 				//sb.append(System.getProperty("line.separator"));
+				
+				// Create the text view
+				TextView myText = (TextView) findViewById(R.id.resultText);
+				 myText.setText(brand);
+				 
+				 Gson js = new Gson();
+				 //Dataobject obj = js.fromJson(product.get("ingredients"), DataObject.class)
 				}  
 			}
 			//resultText.setText(sb.toString());

@@ -9,11 +9,13 @@
     tools:context=".DisplayIngredients" >
 
     <TextView
+        android:id="@+id/helloworld"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
     
     <TextView android:id="@+id/resultText"
+        android:layout_below="@id/helloworld"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/emptyResults" />

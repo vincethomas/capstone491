@@ -1,31 +1,18 @@
 package com.example.allergyapp;
 
-import java.util.List;
-import java.util.Map;
-
-import com.factual.driver.Factual;
-import com.factual.driver.Query;
-import com.factual.driver.ReadResponse;
-import com.google.common.collect.Lists;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.TextView;
 //import com.factual.driver.Factual;
 //import com.factual.driver.ReadResponse;
 //import android.widget.Button;
 
 public class MainActivity extends Activity {
 	
-	private final String OAUTH_KEY = "oQGYt52dXjhcfGJpq3QxufgRtNcNps0Kfa3DrpSk";
-	private final String OAUTH_SECRET = "4beHgBGuELmqEed765JVNGXMnOSZI6DdfFRRaSn1";
-	private Factual factual = new Factual(OAUTH_KEY,OAUTH_SECRET);
-	private TextView resultText = null;
+	public final static String EXTRA_MESSAGE = "com.example.allergyapp.MESSAGE";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +30,6 @@ public class MainActivity extends Activity {
 
 	//View.OnClickListener scanDatShit = new View.OnClickListener(){
     public void scanBarcode(View v) {
-    	//doesn't work, needs "Activity"
-    	
     	IntentIntegrator.initiateScan(this);
     }
    // };
@@ -62,10 +47,16 @@ public class MainActivity extends Activity {
 	                    System.out.println("Success: " + upc);
 	                    Log.d("MyApp", "Success: " + upc);
 	                    
-	                    resultText = (TextView) findViewById(R.id.resultText);
-	                    FactualRetrievalTask task = new FactualRetrievalTask();
-	                    Query query = new Query().search(upc);
-	                    task.execute(query);
+	                    Intent intent = new Intent(this, DisplayIngredients.class);
+	                    
+	                    String message = upc;
+	                    intent.putExtra(EXTRA_MESSAGE, message);
+	                    startActivity(intent);
+	                    
+	                    //resultText = (TextView) findViewById(R.id.resultText);
+	                    //FactualRetrievalTask task = new FactualRetrievalTask();
+	                    //Query query = new Query().search(upc);
+	                    //task.execute(query);
 	                    
 	                }
 	            }
@@ -73,37 +64,5 @@ public class MainActivity extends Activity {
 	        }
 	    }
 	}
-	
-	protected class FactualRetrievalTask extends AsyncTask<Query, Integer, List<ReadResponse>> {
-		@Override
-		protected List<ReadResponse> doInBackground(Query... params) {
-			List<ReadResponse> results = Lists.newArrayList();
-			for (Query q : params) {
-				results.add(factual.fetch("products-cpg-nutrition", q));
-			}
-			return results;
-		}
-
-		@Override
-		protected void onProgressUpdate(Integer... progress) {
-		}
-
-		@Override
-		protected void onPostExecute(List<ReadResponse> responses) {
-			StringBuffer sb = new StringBuffer();
-			for (ReadResponse response : responses) {
-				for (Map<String, Object> product : response.getData()) {
-				String brand = (String) product.get("product_name");
-//				String address = (String) restaurant.get("address");
-//				String phone = (String) restaurant.get("tel");
-//				Number distance = (Number) restaurant.get("$distance");
-				sb.append(brand);
-				sb.append(System.getProperty("line.separator"));
-				}  
-			}
-			resultText.setText(sb.toString());
-		}
-
-	} 
 
 }

@@ -16,7 +16,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
-
 //import com.factual.driver.Factual;
 //import com.factual.driver.ReadResponse;
 //import android.widget.Button;
@@ -45,6 +44,7 @@ public class MainActivity extends Activity {
 	//View.OnClickListener scanDatShit = new View.OnClickListener(){
     public void scanBarcode(View v) {
     	//doesn't work, needs "Activity"
+    	
     	IntentIntegrator.initiateScan(this);
     }
    // };

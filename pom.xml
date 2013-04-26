@@ -6,18 +6,31 @@
     <version>0.1.0-SNAPSHOT</version>
     <packaging>apk</packaging>
     <name>Allergy App</name>
+    
+    <repositories> 
+        <repository> 
+            <id>my-internal-site</id> 
+            <url>file:///${env.HOME}/.m2/repository</url> 
+        </repository> 
+    </repositories> 
 
     <dependencies>
         <dependency>
-            <groupId>com.google.android</groupId>
-            <artifactId>android</artifactId>
-            <version>1.6_r2</version>
-            <scope>provided</scope>
+            <groupId>com.google.android</groupId> 
+            <artifactId>android</artifactId> 
+            <!--<version>${platform.version}</version>--> 
+            <version>17</version> 
+            <scope>provided</scope> 
         </dependency>
         <dependency>
 		  <groupId>com.factual</groupId>
 		  <artifactId>factual-java-driver</artifactId>
 		  <version>1.7.5-android</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.google.android</groupId>
+		  <artifactId>support-v4</artifactId>
+		  <version>r7</version>
 		</dependency>
     </dependencies>
     <build>
@@ -41,7 +54,7 @@
                 <configuration>
                     <sdk>
                         <!-- platform or api level (api level 4 = platform 1.6)-->
-                        <platform>16</platform>
+                        <platform>17</platform>
                     </sdk>
                 </configuration>
             </plugin>

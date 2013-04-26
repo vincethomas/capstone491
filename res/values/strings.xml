@@ -4,8 +4,9 @@
     <string name="app_name">Allergy App</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    
     <string name="edit_message">Enter a message</string>
     <string name="emptyResults">Empty</string>
+    <string name="title_activity_display_ingredients">DisplayIngredients</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

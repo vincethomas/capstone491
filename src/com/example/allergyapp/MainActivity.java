@@ -35,8 +35,8 @@ public class MainActivity extends Activity {
     }
     
     public void history(View view) {
-        Intent intent = new Intent(this, History.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, History.class);
+        //startActivity(intent);
     }
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

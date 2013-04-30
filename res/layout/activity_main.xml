@@ -25,6 +25,7 @@
 	        android:layout_height="60dp"
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="30dp"
+	        android:onClick="enterUPC"
 	        android:text="Scan UPC" />
 	
 	    <Button
@@ -34,6 +35,7 @@
 	        android:layout_below="@+id/upcButton"
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="30dp"
+	        android:onClick="profile"
 	        android:text="Profile" />
 	    
 	    <Button
@@ -46,10 +48,6 @@
 	        android:onClick="history"
 	        android:text="History" />
 	    
-	    <TextView android:id="@+id/resultText"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/emptyResults" />
 
 	</LinearLayout>
 

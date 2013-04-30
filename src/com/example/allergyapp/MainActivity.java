@@ -34,8 +34,21 @@ public class MainActivity extends Activity {
     	IntentIntegrator.initiateScan(this);
     }
     
+    //sends user to history activity
     public void history(View view) {
         Intent intent = new Intent(this, History.class);
+        startActivity(intent);
+    }
+    
+    //sends user to profile activity
+    public void profile(View view) {
+        Intent intent = new Intent(this, Profile.class);
+        startActivity(intent);
+    }
+    
+    //sends user to enter upc activity
+    public void enterUPC(View view) {
+        Intent intent = new Intent(this, EnterUPC.class);
         startActivity(intent);
     }
 	

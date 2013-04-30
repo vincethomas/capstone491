@@ -39,6 +39,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.allergyapp.MainActivity" />
         </activity>
+        <activity
+            android:name="com.example.allergyapp.History"
+            android:label="@string/title_activity_history"
+            android:parentActivityName="com.example.allergyapp.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.allergyapp.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -43,6 +43,7 @@
 	        android:layout_below="@+id/profileButton"
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="30dp"
+	        android:onClick="history"
 	        android:text="History" />
 	    
 	    <TextView android:id="@+id/resultText"

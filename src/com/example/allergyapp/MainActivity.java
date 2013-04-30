@@ -9,6 +9,7 @@ import android.view.View;
 //import com.factual.driver.Factual;
 //import com.factual.driver.ReadResponse;
 //import android.widget.Button;
+import android.widget.EditText;
 
 public class MainActivity extends Activity {
 	
@@ -32,7 +33,11 @@ public class MainActivity extends Activity {
     public void scanBarcode(View v) {
     	IntentIntegrator.initiateScan(this);
     }
-   // };
+    
+    public void history(View view) {
+        Intent intent = new Intent(this, History.class);
+        startActivity(intent);
+    }
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Log.d("MyApp", "result method");

@@ -8,5 +8,6 @@
     <string name="emptyResults">Empty</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_display_ingredients">Product Ingredients</string>
+    <string name="title_activity_history">History</string>
 
 </resources>

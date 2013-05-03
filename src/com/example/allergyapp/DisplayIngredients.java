@@ -168,6 +168,8 @@ public class DisplayIngredients extends Activity {
 					 Log.d("ALLERGY APP", images.length() + " asdf");
 					 try {
 						 imageUrl = images.getString(0);
+						 ImageView piv = (ImageView) findViewById(R.id.productimage);
+						 new DownloadImageTask(piv).execute(imageUrl);
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -179,8 +181,7 @@ public class DisplayIngredients extends Activity {
 				
 				//use image url to display image
 				
-				ImageView piv = (ImageView) findViewById(R.id.productimage);
-				piv.setImageBitmap(null);
+				
 				
 				
 				//break for now as only using first result
@@ -190,6 +191,32 @@ public class DisplayIngredients extends Activity {
 			}
 			//resultText.setText(sb.toString());
 		}//end of on post execute
+		
+		//class to fetch product image asyncronously
+		private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+		    ImageView bmImage;
+
+		    public DownloadImageTask(ImageView bmImage) {
+		        this.bmImage = bmImage;
+		    }
+
+		    protected Bitmap doInBackground(String... urls) {
+		        String urldisplay = urls[0];
+		        Bitmap mIcon11 = null;
+		        try {
+		            InputStream in = new java.net.URL(urldisplay).openStream();
+		            mIcon11 = BitmapFactory.decodeStream(in);
+		        } catch (Exception e) {
+		            Log.e("Error", e.getMessage());
+		            e.printStackTrace();
+		        }
+		        return mIcon11;
+		    }
+
+		    protected void onPostExecute(Bitmap result) {
+		        bmImage.setImageBitmap(result);
+		    }
+		}
 
 	}//end of FactualRetrieval task class
 

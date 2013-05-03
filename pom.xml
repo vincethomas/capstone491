@@ -28,6 +28,11 @@
 		  <version>1.7.5-android</version>
 		</dependency>
 		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20090211</version>
+		</dependency>
+		<dependency>
 		  <groupId>com.google.android</groupId>
 		  <artifactId>support-v4</artifactId>
 		  <version>8</version>

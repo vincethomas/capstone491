@@ -12,12 +12,34 @@
         android:id="@+id/helloworld"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="@string/hello_world"
+        android:textSize="20sp" />
     
-    <TextView android:id="@+id/resultText"
-        android:layout_below="@id/helloworld"
+    <ImageView
+        android:id="@+id/productimage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/helloworld"
+        android:src="@drawable/ic_launcher" />
+    
+    <TextView
+        android:id="@+id/resultText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/emptyResults" />
+        android:layout_below="@id/productimage"
+        android:layout_marginTop="20dp"
+        android:text="@string/emptyResults"
+        android:textSize="30sp" />
+    
+    <TextView
+        android:id="@+id/ingredientList"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/resultText"
+        android:layout_marginTop="20dp"
+        android:text="@string/emptyResults"
+        android:textSize="20sp" />
+
+
 
 </RelativeLayout>

@@ -6,11 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-//import com.factual.driver.Factual;
-//import com.factual.driver.ReadResponse;
-//import android.widget.Button;
-import android.widget.EditText;
-
 public class MainActivity extends Activity {
 	
 	public final static String EXTRA_MESSAGE = "com.example.allergyapp.MESSAGE";

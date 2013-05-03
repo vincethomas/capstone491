@@ -1,25 +1,36 @@
 package com.example.allergyapp;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.factual.driver.Factual;
 import com.factual.driver.Query;
 import com.factual.driver.ReadResponse;
 import com.google.common.collect.Lists;
-import com.google.gson.Gson;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.app.Activity;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.TextView;
-import android.support.v4.app.NavUtils;
-import android.annotation.TargetApi;
-import android.content.Intent;
-import android.os.Build;
 
 public class DisplayIngredients extends Activity {
 	
@@ -107,28 +118,79 @@ public class DisplayIngredients extends Activity {
 
 		@Override
 		protected void onPostExecute(List<ReadResponse> responses) {
-			
+			//eventually may change these from for loops to only reference first result, debating this though so leave for now
 			for (ReadResponse response : responses) {
 				for (Map<String, Object> product : response.getData()) {
-				String brand = (String) product.get("product_name");
-				Log.d("ALLERGY APP", brand);
-//				String address = (String) restaurant.get("address");
-//				String phone = (String) restaurant.get("tel");
-//				Number distance = (Number) restaurant.get("$distance");
-				//sb.append(brand);
-				//sb.append(System.getProperty("line.separator"));
 				
-				// Create the text view
-				TextView myText = (TextView) findViewById(R.id.resultText);
-				 myText.setText(brand);
+				//get the product name and brand
+				String brand = (String) product.get("brand");
+				String productname = (String) product.get("product_name");
+				
+				//test to make sure that the brand is being grabbed in case an error occours
+				Log.d("ALLERGY APP", brand);
+				
+				// Get the text view and set it to the brand and product name
+				TextView productText = (TextView) findViewById(R.id.resultText);
+				productText.setText(brand + " " + productname);
 				 
-				 Gson js = new Gson();
-				 //Dataobject obj = js.fromJson(product.get("ingredients"), DataObject.class)
-				}  
+				 //this gets the ingredients for each product (it is given to us in a JSONArray)
+				 JSONArray ingredients = (JSONArray) product.get("ingredients");
+				 
+				 //run through the list of ingredients and add each on to a string
+				 //the defualt to string method adds brackets commas and quotations so that isn't really what I want
+				 String items = "";
+				 if(ingredients.length()!=0){
+					 try {
+						items =  ingredients.getString(0);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				 }
+				 for(int i = 1; i < ingredients.length(); i++){
+					 //I had to add a try catch loop to silence an error, yay
+					 try {
+						 items = items + ", " + ingredients.getString(i);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				 }
+				 //set the text field to ingredients
+				 TextView productIngredients = (TextView) findViewById(R.id.ingredientList);
+				 productIngredients.setText(items);
+				 
+				 //get the product image url
+				JSONArray images = (JSONArray) product.get("image_urls");
+				String imageUrl = null;
+				if(images !=null){
+					 
+					 Log.d("ALLERGY APP", images.length() + " asdf");
+					 try {
+						 imageUrl = images.getString(0);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					Log.d("ALLERGY APP",imageUrl);
+				}else{
+					Log.d("ALLERGY APP","no images");
+				}
+				
+				//use image url to display image
+				
+				ImageView piv = (ImageView) findViewById(R.id.productimage);
+				piv.setImageBitmap(null);
+				
+				
+				//break for now as only using first result
+				 break;
+				} 
+				break;
 			}
 			//resultText.setText(sb.toString());
-		}
+		}//end of on post execute
 
-	} 
+	}//end of FactualRetrieval task class
 
 }

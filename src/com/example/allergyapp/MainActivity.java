@@ -1,5 +1,5 @@
 package com.example.allergyapp;
-
+// Remember to delete debug code
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

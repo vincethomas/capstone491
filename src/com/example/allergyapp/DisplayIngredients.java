@@ -51,8 +51,8 @@ public class DisplayIngredients extends Activity {
 		 Intent intent = getIntent();
 		 String upc = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 		 
-		 TextView myText = (TextView) findViewById(R.id.helloworld);
-		 myText.setText(upc);
+		 //TextView myText = (TextView) findViewById(R.id.helloworld);
+		 //myText.setText(upc);
 		
 		/*// Create the text view
 	    TextView textView = (TextView) findViewById(R.id.helloworld);
@@ -147,10 +147,14 @@ public class DisplayIngredients extends Activity {
 						e.printStackTrace();
 					}
 				 }
-				 for(int i = 1; i < ingredients.length(); i++){
+				 for(int i = 0; i < ingredients.length(); i++){
 					 //I had to add a try catch loop to silence an error, yay
 					 try {
-						 items = items + ", " + ingredients.getString(i);
+						 String ingredient = ingredients.getString(i).toLowerCase();
+						 for (String splitWord : ingredient.split(" ")){
+							 Log.d("ALLERGY APP", splitWord);
+							 items = items + splitWord + ",";
+						 }
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

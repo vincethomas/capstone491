@@ -10,8 +10,15 @@
     <string name="title_activity_history">History</string>
     <string name="title_activity_profile">Profile</string>
     <string name="title_activity_enter_upc">EnterUPC</string>
-    <string name="edit_message">Enter a UPC code</string>
+    <string name="edit_message">Search for a Product</string>
     <string name="button_send">Submit</string>
     <string name="title_activity_display_message">My Message</string>
+    
+<!-- comma-separated lists of allergy ingredients: -->
+    <string name="dairy">milk,butter,buttermilk,calcium caseinate,casein,cheese,cream,curd,custard,delactosed whey,ghee,iron caseinate,lactalbumin,lactoferrin,lactoglobulin,lactose,lactulose,nougat,paneer,pudding,recaldent</string>
+	<string name="gluten">wheat,barley,rye,oats,oatmeal,oat,flour,barley,yeast,cereal binding,chilton,couscous,criped rice,dinkle,bran,farina,farro,filler,malt,matzah,nuts</string>
+	<string name="wheat">flour,bran,bread,bulgur,cake,cereal extract,couscous,cracker,durum,farina,gluten,graham,pastry,phosphated</string>
+	<string name="nuts">arachis,nuts,peanut,peanuts,satay,beechnut,macadamia,cashew,pecan,sheanut,pistachio,pralines,pesto,goober,hypogaeic acid</string>
+
 
 </resources>

@@ -14,6 +14,7 @@ import org.json.JSONException;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -103,6 +104,17 @@ public class DisplayIngredients extends Activity {
 	}
 	
 	protected class FactualRetrievalTask extends AsyncTask<Query, Integer, List<ReadResponse>> {
+		
+		protected ProgressDialog mDialog;
+		
+		protected void onPreExecute(){
+			 mDialog = new ProgressDialog(getApplicationContext());
+             mDialog.setMessage("Loading...");
+             mDialog.setCancelable(false);
+             mDialog.show();
+		}
+		
+		
 		@Override
 		protected List<ReadResponse> doInBackground(Query... params) {
 			List<ReadResponse> results = Lists.newArrayList();
@@ -174,6 +186,7 @@ public class DisplayIngredients extends Activity {
 						 imageUrl = images.getString(0);
 						 ImageView piv = (ImageView) findViewById(R.id.productimage);
 						 new DownloadImageTask(piv).execute(imageUrl);
+						 mDialog.dismiss();
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -181,6 +194,7 @@ public class DisplayIngredients extends Activity {
 					Log.d("ALLERGY APP",imageUrl);
 				}else{
 					Log.d("ALLERGY APP","no images");
+					mDialog.dismiss();
 				}
 				
 				//use image url to display image

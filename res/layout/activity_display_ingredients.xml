@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/productimage"
         android:layout_marginTop="20dp"
-        android:text="@string/emptyResults"
+        android:text="Loading"
         android:textSize="30sp" />
     
     <TextView
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/resultText"
         android:layout_marginTop="20dp"
-        android:text="@string/emptyResults"
+        android:text=""
         android:textSize="20sp" />
 
 

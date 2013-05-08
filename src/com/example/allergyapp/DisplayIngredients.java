@@ -148,23 +148,16 @@ public class DisplayIngredients extends Activity {
 				 //this gets the ingredients for each product (it is given to us in a JSONArray)
 				 JSONArray ingredients = (JSONArray) product.get("ingredients");
 				 
+				 
+				 
 				 //run through the list of ingredients and add each on to a string
-				 //the defualt to string method adds brackets commas and quotations so that isn't really what I want
-				 String items = "";
-				 if(ingredients.length()!=0){
-					 try {
-						items =  ingredients.getString(0);
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				 }
+				 String items = "";				 
 				 for(int i = 0; i < ingredients.length(); i++){
 					 //I had to add a try catch loop to silence an error, yay
 					 try {
-						 String ingredient = ingredients.getString(i).toLowerCase();
+						 String ingredient = ingredients.getString(i);
 						 for (String splitWord : ingredient.split(" ")){
-							 Log.d("ALLERGY APP", splitWord);
+							 splitWord = splitWord.toLowerCase();
 							 items = items + splitWord + ",";
 						 }
 					} catch (JSONException e) {
@@ -172,16 +165,38 @@ public class DisplayIngredients extends Activity {
 						e.printStackTrace();
 					}
 				 }
+				 
+				 
+				 //gets item names for printing
+				 String outputItems = "";
+					 for(int i = 0; i < ingredients.length(); i++){
+						 //I had to add a try catch loop to silence an error, yay
+						 try {
+							 String ingredient = ingredients.getString(i);
+							 /*  TODO
+							  * 
+							  *  if item is the allergy list for this user, either make it
+							  *  red or add it to a different list of flagged items.
+							  */
+							 outputItems = outputItems + ingredient + ", ";
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					 }
+					 if (outputItems.length() > 2){
+						 outputItems = outputItems.substring(0, outputItems.length()-2);
+					 }
+				 
 				 //set the text field to ingredients
 				 TextView productIngredients = (TextView) findViewById(R.id.ingredientList);
-				 productIngredients.setText(items);
+				 productIngredients.setText(outputItems);
 				 
 				 //get the product image url
 				JSONArray images = (JSONArray) product.get("image_urls");
 				String imageUrl = null;
 				if(images !=null){
 					 
-					 Log.d("ALLERGY APP", images.length() + " asdf");
 					 try {
 						 imageUrl = images.getString(0);
 						 ImageView piv = (ImageView) findViewById(R.id.productimage);

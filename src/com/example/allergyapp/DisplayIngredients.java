@@ -1,25 +1,33 @@
 package com.example.allergyapp;
 
+
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.factual.driver.Factual;
 import com.factual.driver.Query;
 import com.factual.driver.ReadResponse;
 import com.google.common.collect.Lists;
-import com.google.gson.Gson;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.app.Activity;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.TextView;
-import android.support.v4.app.NavUtils;
-import android.annotation.TargetApi;
-import android.content.Intent;
-import android.os.Build;
 
 public class DisplayIngredients extends Activity {
 	
@@ -40,8 +48,8 @@ public class DisplayIngredients extends Activity {
 		 Intent intent = getIntent();
 		 String upc = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 		 
-		 TextView myText = (TextView) findViewById(R.id.helloworld);
-		 myText.setText(upc);
+		 //TextView myText = (TextView) findViewById(R.id.helloworld);
+		 //myText.setText(upc);
 		
 		/*// Create the text view
 	    TextView textView = (TextView) findViewById(R.id.helloworld);
@@ -55,6 +63,11 @@ public class DisplayIngredients extends Activity {
         FactualRetrievalTask task = new FactualRetrievalTask();
         Query query = new Query().search(upc);
         task.execute(query);
+		ProgressDialog mDialog;
+		mDialog = new ProgressDialog(this);
+		mDialog.setMessage("Loading...");
+        mDialog.setCancelable(false);
+        mDialog.show();
 	}
 
 	/**
@@ -92,6 +105,14 @@ public class DisplayIngredients extends Activity {
 	}
 	
 	protected class FactualRetrievalTask extends AsyncTask<Query, Integer, List<ReadResponse>> {
+		
+
+		@Override
+		protected void onPreExecute(){
+			
+		}
+		
+		
 		@Override
 		protected List<ReadResponse> doInBackground(Query... params) {
 			List<ReadResponse> results = Lists.newArrayList();
@@ -107,28 +128,127 @@ public class DisplayIngredients extends Activity {
 
 		@Override
 		protected void onPostExecute(List<ReadResponse> responses) {
-			
+			//eventually may change these from for loops to only reference first result, debating this though so leave for now
 			for (ReadResponse response : responses) {
 				for (Map<String, Object> product : response.getData()) {
-				String brand = (String) product.get("product_name");
-				Log.d("ALLERGY APP", brand);
-//				String address = (String) restaurant.get("address");
-//				String phone = (String) restaurant.get("tel");
-//				Number distance = (Number) restaurant.get("$distance");
-				//sb.append(brand);
-				//sb.append(System.getProperty("line.separator"));
 				
-				// Create the text view
-				TextView myText = (TextView) findViewById(R.id.resultText);
-				 myText.setText(brand);
+				//get the product name and brand
+				String brand = (String) product.get("brand");
+				String productname = (String) product.get("product_name");
+				
+				//test to make sure that the brand is being grabbed in case an error occours
+				Log.d("ALLERGY APP", brand);
+				
+				// Get the text view and set it to the brand and product name
+				TextView productText = (TextView) findViewById(R.id.resultText);
+				productText.setText(brand + " " + productname);
 				 
-				 Gson js = new Gson();
-				 //Dataobject obj = js.fromJson(product.get("ingredients"), DataObject.class)
-				}  
+				 //this gets the ingredients for each product (it is given to us in a JSONArray)
+				 JSONArray ingredients = (JSONArray) product.get("ingredients");
+				 
+				 
+				 
+				 //run through the list of ingredients and add each on to a string
+				 String items = "";				 
+				 for(int i = 0; i < ingredients.length(); i++){
+					 //I had to add a try catch loop to silence an error, yay
+					 try {
+						 String ingredient = ingredients.getString(i);
+						 for (String splitWord : ingredient.split(" ")){
+							 splitWord = splitWord.toLowerCase();
+							 items = items + splitWord + ",";
+						 }
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				 }
+				 
+				 
+				 //gets item names for printing
+				 String outputItems = "";
+					 for(int i = 0; i < ingredients.length(); i++){
+						 //I had to add a try catch loop to silence an error, yay
+						 try {
+							 String ingredient = ingredients.getString(i);
+							 /*  TODO
+							  * 
+							  *  if item is the allergy list for this user, either make it
+							  *  red or add it to a different list of flagged items.
+							  */
+							 outputItems = outputItems + ingredient + ", ";
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					 }
+					 if (outputItems.length() > 2){
+						 outputItems = outputItems.substring(0, outputItems.length()-2);
+					 }
+				 
+				 //set the text field to ingredients
+				 TextView productIngredients = (TextView) findViewById(R.id.ingredientList);
+				 productIngredients.setText(outputItems);
+				 
+				 //get the product image url
+				JSONArray images = (JSONArray) product.get("image_urls");
+				String imageUrl = null;
+				if(images !=null){
+					 
+					 try {
+						 imageUrl = images.getString(0);
+						 ImageView piv = (ImageView) findViewById(R.id.productimage);
+						 new DownloadImageTask(piv).execute(imageUrl);
+						// mDialog.dismiss();
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					Log.d("ALLERGY APP",imageUrl);
+				}else{
+					Log.d("ALLERGY APP","no images");
+					//mDialog.dismiss();
+				}
+				
+				//use image url to display image
+				
+				
+				
+				
+				//break for now as only using first result
+				 break;
+				} 
+				break;
 			}
 			//resultText.setText(sb.toString());
+		}//end of on post execute
+		
+		//class to fetch product image asyncronously
+		private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+		    ImageView bmImage;
+
+		    public DownloadImageTask(ImageView bmImage) {
+		        this.bmImage = bmImage;
+		    }
+
+		    protected Bitmap doInBackground(String... urls) {
+		        String urldisplay = urls[0];
+		        Bitmap mIcon11 = null;
+		        try {
+		            InputStream in = new java.net.URL(urldisplay).openStream();
+		            mIcon11 = BitmapFactory.decodeStream(in);
+		        } catch (Exception e) {
+		            Log.e("Error", e.getMessage());
+		            e.printStackTrace();
+		        }
+		        return mIcon11;
+		    }
+
+		    protected void onPostExecute(Bitmap result) {
+		        bmImage.setImageBitmap(result);
+		    }
 		}
 
-	} 
+	}//end of FactualRetrieval task class
 
 }

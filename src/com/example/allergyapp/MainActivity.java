@@ -1,15 +1,12 @@
 package com.example.allergyapp;
-
+// Remember to delete debug code
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-//import com.factual.driver.Factual;
-//import com.factual.driver.ReadResponse;
-//import android.widget.Button;
-import android.widget.EditText;
+
 
 public class MainActivity extends Activity {
 	
@@ -34,8 +31,21 @@ public class MainActivity extends Activity {
     	IntentIntegrator.initiateScan(this);
     }
     
+    //sends user to history activity
     public void history(View view) {
         Intent intent = new Intent(this, History.class);
+        startActivity(intent);
+    }
+    
+    //sends user to profile activity
+    public void profile(View view) {
+        Intent intent = new Intent(this, Profile.class);
+        startActivity(intent);
+    }
+    
+    //sends user to enter upc activity
+    public void enterUPC(View view) {
+        Intent intent = new Intent(this, EnterUPC.class);
         startActivity(intent);
     }
 	

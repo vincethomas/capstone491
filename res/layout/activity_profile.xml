@@ -8,22 +8,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Profile" >
 
-        <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:text="Change user" />
-
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="User123"
+        android:text="Allergy Profile"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <RadioButton
@@ -42,7 +33,7 @@
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
         android:layout_marginTop="61dp"
-        android:text="Nuts" />
+        android:text="Peanut" />
     
     <RadioButton
         android:id="@+id/radioButton1"
@@ -61,5 +52,57 @@
         android:layout_below="@+id/textView1"
         android:layout_marginTop="141dp"
         android:text="Dairy" />
+
+    <RadioButton
+        android:id="@+id/radioButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="181dp"
+        android:text="Shellfish" />
+
+    <RadioButton
+        android:id="@+id/radioButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="221dp"
+        android:text="Tree nuts" />
+
+    <Button
+        android:id="@+id/Button01"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button1"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="22dp"
+        android:text="Cancel" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:layout_toLeftOf="@+id/Button01"
+        android:text="Save" />
+
+	<!--  
+	<LinearLayout android:id="@+id/LinearLayout01"
+	    android:layout_width="fill_parent" android:layout_height="fill_parent"
+	   	xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+		<ListView
+		    android:id="@+id/ListView01"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" >
+		</ListView>
+
+	</LinearLayout> 
+    -->
 
 </RelativeLayout>

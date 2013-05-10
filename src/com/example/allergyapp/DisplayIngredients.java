@@ -197,8 +197,8 @@ public class DisplayIngredients extends Activity {
 					 try {
 						 imageUrl = images.getString(0);
 						 ImageView piv = (ImageView) findViewById(R.id.productimage);
-						 new DownloadImageTask(piv).execute(imageUrl);
-						 mDialog.dismiss();
+						 new DownloadImageTask(piv, mDialog).execute(imageUrl);
+						 //mDialog.dismiss();
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -225,9 +225,11 @@ public class DisplayIngredients extends Activity {
 		//class to fetch product image asyncronously
 		private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		    ImageView bmImage;
+		    ProgressDialog mDialog;
 
-		    public DownloadImageTask(ImageView bmImage) {
+		    public DownloadImageTask(ImageView bmImage, ProgressDialog mDialog) {
 		        this.bmImage = bmImage;
+		        this.mDialog = mDialog;
 		    }
 
 		    protected Bitmap doInBackground(String... urls) {
@@ -245,6 +247,7 @@ public class DisplayIngredients extends Activity {
 
 		    protected void onPostExecute(Bitmap result) {
 		        bmImage.setImageBitmap(result);
+		        mDialog.dismiss();
 		    }
 		}
 

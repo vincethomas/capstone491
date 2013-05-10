@@ -63,11 +63,7 @@ public class DisplayIngredients extends Activity {
         FactualRetrievalTask task = new FactualRetrievalTask();
         Query query = new Query().search(upc);
         task.execute(query);
-		ProgressDialog mDialog;
-		mDialog = new ProgressDialog(this);
-		mDialog.setMessage("Loading...");
-        mDialog.setCancelable(false);
-        mDialog.show();
+		
 	}
 
 	/**
@@ -105,11 +101,14 @@ public class DisplayIngredients extends Activity {
 	}
 	
 	protected class FactualRetrievalTask extends AsyncTask<Query, Integer, List<ReadResponse>> {
-		
+		ProgressDialog mDialog;
 
 		@Override
 		protected void onPreExecute(){
-			
+			mDialog = new ProgressDialog(DisplayIngredients.this);
+			mDialog.setMessage("Loading...");
+	        mDialog.setCancelable(false);
+	        mDialog.show();
 		}
 		
 		
@@ -199,7 +198,7 @@ public class DisplayIngredients extends Activity {
 						 imageUrl = images.getString(0);
 						 ImageView piv = (ImageView) findViewById(R.id.productimage);
 						 new DownloadImageTask(piv).execute(imageUrl);
-						// mDialog.dismiss();
+						 mDialog.dismiss();
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -207,7 +206,7 @@ public class DisplayIngredients extends Activity {
 					Log.d("ALLERGY APP",imageUrl);
 				}else{
 					Log.d("ALLERGY APP","no images");
-					//mDialog.dismiss();
+					mDialog.dismiss();
 				}
 				
 				//use image url to display image

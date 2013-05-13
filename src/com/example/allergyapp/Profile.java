@@ -1,11 +1,15 @@
 package com.example.allergyapp;
 
+import java.io.*;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.os.Build;
 
 public class Profile extends Activity {
@@ -13,9 +17,35 @@ public class Profile extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		saveUserData();
+		getUserData();
 		setContentView(R.layout.activity_profile);
 		// Show the Up button in the action bar.
 		setupActionBar();
+	}
+	
+	private void saveUserData() {
+		String filename = "ALLERGYAPPDATA";
+		String string = "Hello world!";
+		FileOutputStream outputStream;
+		try {
+		  outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+		  outputStream.write(string.getBytes());
+		  outputStream.close();
+		} catch (Exception e) {
+		  e.printStackTrace();
+		}
+	}
+	
+	private void getUserData() {
+		String filename = "ALLERGYAPPDATA";
+		try {
+			FileInputStream input = openFileInput(filename);
+			Log.d("ALLERGY APP", "getUserData: " + input.toString());
+		} catch (Exception e) {
+				Log.d("ALLERGY APP", "Exception: " + e);
+				e.printStackTrace();
+		}
 	}
 
 	/**

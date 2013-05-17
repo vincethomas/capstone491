@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -24,13 +25,25 @@ public class Profile extends Activity {
 		setupActionBar();
 	}
 	
+	//must be public for button call
+	//take in view
 	public void saveUserData(View v) {
 		String filename = "ALLERGYAPPDATA";
 		String string = "Hello world!";
+		
+		//ingredients string (add all potential ingredients to string for writing to file)
+		String allergicIngredients = "";
+		
+		//get the glutencheckbox
+		CheckBox glutencb = (CheckBox)findViewById(R.id.glutencheckbox);
+		if(glutencb.isChecked()){
+			allergicIngredients += getString(R.string.gluten);	
+		}
+		
 		FileOutputStream outputStream;
 		try {
 		  outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-		  outputStream.write(string.getBytes());
+		  outputStream.write(allergicIngredients.getBytes());
 		  outputStream.close();
 		} catch (Exception e) {
 		  e.printStackTrace();

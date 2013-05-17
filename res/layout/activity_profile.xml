@@ -54,7 +54,7 @@
     -->
 
     <CheckBox
-        android:id="@+id/checkBox1"
+        android:id="@+id/glutencheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
@@ -64,51 +64,51 @@
         android:textSize="30sp" />
 
     <CheckBox
-        android:id="@+id/checkBox2"
+        android:id="@+id/wheatcheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/checkBox1"
-        android:layout_below="@+id/checkBox1"
+        android:layout_alignLeft="@+id/glutencheckbox"
+        android:layout_below="@+id/glutencheckbox"
         android:layout_marginTop="10dp"
         android:textSize="30sp"
         android:text="Wheat" />
 
     <CheckBox
-        android:id="@+id/checkBox3"
+        android:id="@+id/dairycheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/checkBox2"
-        android:layout_below="@+id/checkBox2"
+        android:layout_alignLeft="@+id/wheatcheckbox"
+        android:layout_below="@+id/wheatcheckbox"
         android:layout_marginTop="10dp"
         android:textSize="30sp"
         android:text="Dairy" />
 
     <CheckBox
-        android:id="@+id/checkBox4"
+        android:id="@+id/shellfishcheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/checkBox3"
-        android:layout_below="@+id/checkBox3"
+        android:layout_alignLeft="@+id/dairycheckbox"
+        android:layout_below="@+id/dairycheckbox"
         android:layout_marginTop="10dp"
         android:textSize="30sp"
         android:text="Shellfish" />
 
     <CheckBox
-        android:id="@+id/checkBox5"
+        android:id="@+id/peanutcheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/checkBox4"
-        android:layout_below="@+id/checkBox4"
+        android:layout_alignLeft="@+id/shellfishcheckbox"
+        android:layout_below="@+id/shellfishcheckbox"
         android:layout_marginTop="10dp"
         android:textSize="30sp"
         android:text="Peanut" />
 
     <CheckBox
-        android:id="@+id/checkBox6"
+        android:id="@+id/treenutscheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/checkBox5"
-        android:layout_below="@+id/checkBox5"
+        android:layout_alignLeft="@+id/peanutcheckbox"
+        android:layout_below="@+id/peanutcheckbox"
         android:layout_marginTop="10dp"
         android:textSize="30sp"
         android:text="Tree Nuts" />

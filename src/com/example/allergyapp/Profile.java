@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -17,14 +18,13 @@ public class Profile extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		saveUserData();
-		getUserData();
+		
 		setContentView(R.layout.activity_profile);
 		// Show the Up button in the action bar.
 		setupActionBar();
 	}
 	
-	private void saveUserData() {
+	public void saveUserData(View v) {
 		String filename = "ALLERGYAPPDATA";
 		String string = "Hello world!";
 		FileOutputStream outputStream;
@@ -35,17 +35,29 @@ public class Profile extends Activity {
 		} catch (Exception e) {
 		  e.printStackTrace();
 		}
+		getUserData();
 	}
 	
 	private void getUserData() {
 		String filename = "ALLERGYAPPDATA";
 		try {
 			FileInputStream input = openFileInput(filename);
-			Log.d("ALLERGY APP", "getUserData: " + input.toString());
+			String debuger = convertStreamToString(input);
+			Log.d("ALLERGY APP", "getUserData: " + debuger);
 		} catch (Exception e) {
 				Log.d("ALLERGY APP", "Exception: " + e);
 				e.printStackTrace();
 		}
+	}
+	
+	private String convertStreamToString(InputStream is) throws Exception {
+	    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+	    StringBuilder sb = new StringBuilder();
+	    String line = null;
+	    while ((line = reader.readLine()) != null) {
+	      sb.append(line).append("\n");
+	    }
+	    return sb.toString();
 	}
 
 	/**

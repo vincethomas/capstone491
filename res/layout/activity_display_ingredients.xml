@@ -13,8 +13,7 @@
     <ImageView
         android:id="@+id/productimage"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher" />
+        android:layout_height="wrap_content" />
     
     <TextView
         android:id="@+id/resultText"
@@ -26,10 +25,20 @@
         android:textSize="30sp" />
     
     <TextView
-        android:id="@+id/ingredientList"
+        android:id="@+id/flaggedList"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/resultText"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textColor="#C00000"
+        android:textSize="20sp" />
+    
+    <TextView
+        android:id="@+id/ingredientList"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/flaggedList"
         android:layout_marginTop="20dp"
         android:text=""
         android:textSize="20sp" />

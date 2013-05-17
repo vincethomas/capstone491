@@ -15,61 +15,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="Allergy Profile"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <RadioButton
-        android:id="@+id/radioButton1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="21dp"
-        android:text="Gluten" />
-    
-    <RadioButton
-        android:id="@+id/radioButton1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="61dp"
-        android:text="Peanut" />
-    
-    <RadioButton
-        android:id="@+id/radioButton1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="101dp"
-        android:text="Wheat" />
-    
-    <RadioButton
-        android:id="@+id/radioButton1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="141dp"
-        android:text="Dairy" />
-
-    <RadioButton
-        android:id="@+id/radioButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="181dp"
-        android:text="Shellfish" />
-
-    <RadioButton
-        android:id="@+id/radioButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="221dp"
-        android:text="Tree nuts" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="40sp" />
 
     <Button
         android:id="@+id/Button01"
@@ -88,6 +35,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="16dp"
         android:layout_toLeftOf="@+id/Button01"
+        android:onClick="saveUserData"
         android:text="Save" />
 
 	<!--  
@@ -104,5 +52,56 @@
 
 	</LinearLayout> 
     -->
+
+    <CheckBox
+        android:id="@+id/glutencheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="10dp"
+        android:text="Gluten"
+        android:textSize="30sp" />
+
+    <CheckBox
+        android:id="@+id/wheatcheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/glutencheckbox"
+        android:layout_below="@+id/glutencheckbox"
+        android:layout_marginTop="10dp"
+        android:textSize="30sp"
+        android:text="Wheat" />
+
+    <CheckBox
+        android:id="@+id/dairycheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/wheatcheckbox"
+        android:layout_below="@+id/wheatcheckbox"
+        android:layout_marginTop="10dp"
+        android:textSize="30sp"
+        android:text="Dairy" />
+
+    <CheckBox
+        android:id="@+id/shellfishcheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/dairycheckbox"
+        android:layout_below="@+id/dairycheckbox"
+        android:layout_marginTop="10dp"
+        android:textSize="30sp"
+        android:text="Shellfish" />
+
+    <CheckBox
+        android:id="@+id/nutcheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/shellfishcheckbox"
+        android:layout_below="@+id/shellfishcheckbox"
+        android:layout_marginTop="10dp"
+        android:textSize="30sp"
+        android:text="Nuts" />
+
 
 </RelativeLayout>

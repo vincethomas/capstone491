@@ -1,12 +1,15 @@
 package com.example.allergyapp;
 
 import java.io.*;
+import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -17,35 +20,117 @@ public class Profile extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		saveUserData();
-		getUserData();
+		//TODO need something here to repopulate the checkboxes onload for user**********************************************
 		setContentView(R.layout.activity_profile);
 		// Show the Up button in the action bar.
 		setupActionBar();
 	}
 	
-	private void saveUserData() {
+	//must be public for button call
+	//take in view
+	public void saveUserData(View v) {
 		String filename = "ALLERGYAPPDATA";
-		String string = "Hello world!";
+		String filenameCheckboxes = "ALLERGIES";
+		
+		
+		//ingredients string (add all potential ingredients to string for writing to file)
+		String allergicIngredients = "";
+		ArrayList<String> allergies = new ArrayList<String>();
+		
+		//go through each checkbox and see which are checked
+		CheckBox glutencb = (CheckBox)findViewById(R.id.glutencheckbox);
+		if(glutencb.isChecked()){
+			allergicIngredients += getString(R.string.gluten);
+			allergies.add("glutencheckbox");
+		}
+		CheckBox wheatcb = (CheckBox)findViewById(R.id.wheatcheckbox);
+		if(wheatcb.isChecked()){
+			allergicIngredients += getString(R.string.wheat);
+			allergies.add("wheatcheckbox");
+		}
+		CheckBox nutscb = (CheckBox)findViewById(R.id.nutcheckbox);
+		if(nutscb.isChecked()){
+			allergicIngredients += getString(R.string.nuts);
+			allergies.add("nutcheckbox");
+		}
+		CheckBox dairycb = (CheckBox)findViewById(R.id.dairycheckbox);
+		if(dairycb.isChecked()){
+			allergicIngredients += getString(R.string.dairy);
+			allergies.add("dairycheckbox");
+		}
+		CheckBox shellfishcb = (CheckBox)findViewById(R.id.shellfishcheckbox);
+		if(shellfishcb.isChecked()){
+			allergicIngredients += getString(R.string.shellfish);
+			allergies.add("shellfishcheckbox");
+		}
+		
+		//convert allergies arraylist to string to be saved
+		String allergiesString = null;
+		if(allergies.size() > 0){
+			allergiesString = allergies.get(0);
+			for(int i = 1; i < allergies.size(); i ++){
+				allergiesString += "," + allergies.get(i);
+			}
+		}
+		
+		
 		FileOutputStream outputStream;
 		try {
 		  outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-		  outputStream.write(string.getBytes());
+		  outputStream.write(allergicIngredients.getBytes());
 		  outputStream.close();
+		  if(allergiesString != null){
+			  //if a checkbox was checked save the string
+			  FileOutputStream os = openFileOutput(filenameCheckboxes, Context.MODE_PRIVATE);
+			  os.write(allergiesString.getBytes());
+			  os.close();
+		  }
+		  
 		} catch (Exception e) {
 		  e.printStackTrace();
 		}
 	}
 	
 	private void getUserData() {
-		String filename = "ALLERGYAPPDATA";
+		
+		String filename = "ALLERGIES";
+		//get allergies from file and set checkboxes
 		try {
 			FileInputStream input = openFileInput(filename);
-			Log.d("ALLERGY APP", "getUserData: " + input.toString());
+			String allergString = convertStreamToString(input);
+			
+			Log.d("ALLERGY APP", "getUserData: " + allergString);
+			
+			//turn allergies into array
+			String[] allergies = allergString.split(",");
+			for(String a : allergies){
+				
+				Log.d("ALLERGY APP", a);
+				int id = getResources().getIdentifier(a.trim(), "id", this.getPackageName());
+				Log.d("ALLERGY APP", ""+id);
+				//Log.d("ALLERGY APP", "dariy id = " + R.id.dairycheckbox);
+				CheckBox cb = (CheckBox) findViewById(id);
+				
+				//Log.d("ALLERGY APP", a + ": " + cb.isChecked());
+				//cb.getText();
+				
+				cb.setChecked(true);
+			}
+			
 		} catch (Exception e) {
 				Log.d("ALLERGY APP", "Exception: " + e);
 				e.printStackTrace();
 		}
+	}
+	
+	private String convertStreamToString(InputStream is) throws Exception {
+	    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+	    StringBuilder sb = new StringBuilder();
+	    String line = null;
+	    while ((line = reader.readLine()) != null) {
+	      sb.append(line).append("\n");
+	    }
+	    return sb.toString();
 	}
 
 	/**

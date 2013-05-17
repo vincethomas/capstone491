@@ -19,7 +19,7 @@ public class Profile extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		//TODO need something here to repopulate the checkboxes onload for user**********************************************
 		setContentView(R.layout.activity_profile);
 		// Show the Up button in the action bar.
 		setupActionBar();

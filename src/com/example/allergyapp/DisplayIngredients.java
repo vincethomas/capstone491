@@ -229,8 +229,6 @@ public class DisplayIngredients extends Activity {
 					public void onClick(DialogInterface dialog,int id) {
 						// if this button is clicked, close
 						// current activity
-						//MainActivity.this.finish();
-						//dialog.cancel();
 						DisplayIngredients.this.finish();
 					}
 				  });

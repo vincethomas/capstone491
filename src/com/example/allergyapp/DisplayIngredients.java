@@ -10,7 +10,9 @@ import org.json.JSONException;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -127,10 +129,11 @@ public class DisplayIngredients extends Activity {
 
 		@Override
 		protected void onPostExecute(List<ReadResponse> responses) {
+			boolean foundProduct = false;
 			//eventually may change these from for loops to only reference first result, debating this though so leave for now
 			for (ReadResponse response : responses) {
 				for (Map<String, Object> product : response.getData()) {
-				
+				foundProduct=true;
 				//get the product name and brand
 				String brand = (String) product.get("brand");
 				String productname = (String) product.get("product_name");
@@ -209,17 +212,35 @@ public class DisplayIngredients extends Activity {
 					mDialog.dismiss();
 				}
 				
-				//use image url to display image
-				
-				
-				
-				
 				//break for now as only using first result
 				 break;
 				} 
 				break;
 			}
-			//resultText.setText(sb.toString());
+			//if no product was found dismiss the loading screen
+			if(!foundProduct){
+				mDialog.dismiss();
+				//popup alert dialogue to take user back to main page
+				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DisplayIngredients.this);
+				alertDialogBuilder
+				.setMessage("Sorry, the product was not found, returning to main page")
+				.setCancelable(false)
+				.setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,int id) {
+						// if this button is clicked, close
+						// current activity
+						//MainActivity.this.finish();
+						//dialog.cancel();
+						DisplayIngredients.this.finish();
+					}
+				  });
+				AlertDialog alert = alertDialogBuilder.create();
+                alert.show();
+				
+				//replace loading text
+				TextView productText = (TextView) findViewById(R.id.resultText);
+				productText.setText("Product Not Found");
+			}
 		}//end of on post execute
 		
 		//class to fetch product image asyncronously

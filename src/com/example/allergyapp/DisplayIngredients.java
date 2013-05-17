@@ -253,7 +253,7 @@ public class DisplayIngredients extends Activity {
 				String imageUrl = null;
 				if(images !=null){
 					 
-					 try {
+					try {
 						 imageUrl = images.getString(0);
 						 ImageView piv = (ImageView) findViewById(R.id.productimage);
 						 new DownloadImageTask(piv, mDialog).execute(imageUrl);
@@ -263,6 +263,7 @@ public class DisplayIngredients extends Activity {
 						e.printStackTrace();
 					}
 					Log.d("ALLERGY APP",imageUrl);
+					mDialog.dismiss();
 				}else{
 					Log.d("ALLERGY APP","no images");
 					mDialog.dismiss();

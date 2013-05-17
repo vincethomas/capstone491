@@ -43,11 +43,11 @@ public class Profile extends Activity {
 			allergicIngredients += getString(R.string.wheat);	
 		}
 		CheckBox nutscb = (CheckBox)findViewById(R.id.nutcheckbox);
-		if(wheatcb.isChecked()){
+		if(nutscb.isChecked()){
 			allergicIngredients += getString(R.string.nuts);	
 		}
 		CheckBox dairycb = (CheckBox)findViewById(R.id.dairycheckbox);
-		if(wheatcb.isChecked()){
+		if(dairycb.isChecked()){
 			allergicIngredients += getString(R.string.dairy);
 		}
 		CheckBox shellfishcb = (CheckBox)findViewById(R.id.shellfishcheckbox);

@@ -48,7 +48,7 @@ public class Profile extends Activity {
 		}
 		CheckBox dairycb = (CheckBox)findViewById(R.id.dairycheckbox);
 		if(wheatcb.isChecked()){
-			allergicIngredients += getString(R.string.dairy);	
+			allergicIngredients += getString(R.string.dairy);
 		}
 		CheckBox shellfishcb = (CheckBox)findViewById(R.id.shellfishcheckbox);
 		if(shellfishcb.isChecked()){

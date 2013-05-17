@@ -1,7 +1,10 @@
 package com.example.allergyapp;
 
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
 
@@ -102,6 +105,45 @@ public class DisplayIngredients extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	private String getUserData() {
+		String filename = "ALLERGYAPPDATA";
+		try {
+			FileInputStream input = openFileInput(filename);
+			String ingredients = convertStreamToString(input);
+			return ingredients;
+		} catch (Exception e) {
+			Log.d("ALLERGY APP", "Exception: " + e);
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	private String convertStreamToString(InputStream is) throws Exception {
+	    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+	    StringBuilder sb = new StringBuilder();
+	    String line = null;
+	    while ((line = reader.readLine()) != null) {
+	      sb.append(line).append("\n");
+	    }
+	    return sb.toString();
+	}
+	
+	public String getResults (String ingredients, String allergies) {
+		String flaggedIngredients = "";
+		String[] ing = ingredients.split(",");
+		String[] all = allergies.split(",");
+		for (String a : all){
+			for (String i : ing){
+				i = i.toLowerCase().trim();
+				a = a.toLowerCase().trim();
+				if (a.equals(i) || i.contains(a)){
+					flaggedIngredients = flaggedIngredients + i + ",";
+				}
+			}
+		}
+		return flaggedIngredients;
+	}
+	
 	protected class FactualRetrievalTask extends AsyncTask<Query, Integer, List<ReadResponse>> {
 		ProgressDialog mDialog;
 
@@ -155,40 +197,54 @@ public class DisplayIngredients extends Activity {
 				 for(int i = 0; i < ingredients.length(); i++){
 					 //I had to add a try catch loop to silence an error, yay
 					 try {
-						 String ingredient = ingredients.getString(i);
-						 for (String splitWord : ingredient.split(" ")){
-							 splitWord = splitWord.toLowerCase();
-							 items = items + splitWord + ",";
-						 }
+						 items = items + ingredients.getString(i) + ",";
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				 }
 				 
+				 //get user's allergy ingredients
+				 String userAllergies = getUserData();
+				 
+				 //returns results equal in current ingredients and user's allergies
+				 String fr = getResults(items, userAllergies);
+				 String flaggedResults = "";
+				 String[] flaggedResultsArray = fr.split(",");
+				 for (int i = 0; i < flaggedResultsArray.length; i++){
+					 if (!(flaggedResults.contains(flaggedResultsArray[i]))){
+						 flaggedResults = flaggedResults + flaggedResultsArray[i] + ", ";
+					 }
+				 }
 				 
 				 //gets item names for printing
 				 String outputItems = "";
+				 String flaggedItems = "";
 					 for(int i = 0; i < ingredients.length(); i++){
 						 //I had to add a try catch loop to silence an error, yay
 						 try {
 							 String ingredient = ingredients.getString(i);
-							 /*  TODO
-							  * 
-							  *  if item is the allergy list for this user, either make it
-							  *  red or add it to a different list of flagged items.
-							  */
-							 outputItems = outputItems + ingredient + ", ";
+							 if (flaggedResults.contains(ingredient.toLowerCase())){
+								 flaggedItems = flaggedItems + ingredient.replaceAll("[^a-zA-Z0-9 ]+","") + ", ";
+							 } else {
+								 outputItems = outputItems + ingredient.replaceAll("[^a-zA-Z0-9 ]+","") + ", ";
+							 }
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					 }
+					 //trim off trailing comma and space
 					 if (outputItems.length() > 2){
 						 outputItems = outputItems.substring(0, outputItems.length()-2);
 					 }
+					 if (flaggedItems.length() > 2){
+						 flaggedItems = flaggedItems.substring(0, flaggedItems.length()-2);
+					 }
 				 
 				 //set the text field to ingredients
+				 TextView flaggedIngredients = (TextView) findViewById(R.id.flaggedList);
+				 flaggedIngredients.setText(flaggedItems);
 				 TextView productIngredients = (TextView) findViewById(R.id.ingredientList);
 				 productIngredients.setText(outputItems);
 				 

@@ -89,7 +89,6 @@ public class Profile extends Activity {
 		} catch (Exception e) {
 		  e.printStackTrace();
 		}
-		getUserData();
 	}
 	
 	private void getUserData() {

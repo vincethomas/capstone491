@@ -63,18 +63,19 @@ public class Profile extends Activity {
 		} catch (Exception e) {
 		  e.printStackTrace();
 		}
-		getUserData();
 	}
 	
-	private void getUserData() {
+	private String getUserData() {
 		String filename = "ALLERGYAPPDATA";
 		try {
 			FileInputStream input = openFileInput(filename);
-			String debuger = convertStreamToString(input);
-			Log.d("ALLERGY APP", "getUserData: " + debuger);
+			String ingredients = convertStreamToString(input);
+			Log.d("ALLERGY APP", "getUserData: " + ingredients);
+			return ingredients;
 		} catch (Exception e) {
-				Log.d("ALLERGY APP", "Exception: " + e);
-				e.printStackTrace();
+			Log.d("ALLERGY APP", "Exception: " + e);
+			e.printStackTrace();
+			return null;
 		}
 	}
 	

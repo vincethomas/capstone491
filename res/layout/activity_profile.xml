@@ -94,23 +94,14 @@
         android:text="Shellfish" />
 
     <CheckBox
-        android:id="@+id/peanutcheckbox"
+        android:id="@+id/nutcheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/shellfishcheckbox"
         android:layout_below="@+id/shellfishcheckbox"
         android:layout_marginTop="10dp"
         android:textSize="30sp"
-        android:text="Peanut" />
+        android:text="Nuts" />
 
-    <CheckBox
-        android:id="@+id/treenutscheckbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/peanutcheckbox"
-        android:layout_below="@+id/peanutcheckbox"
-        android:layout_marginTop="10dp"
-        android:textSize="30sp"
-        android:text="Tree Nuts" />
 
 </RelativeLayout>

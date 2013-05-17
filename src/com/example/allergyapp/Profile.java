@@ -34,10 +34,25 @@ public class Profile extends Activity {
 		//ingredients string (add all potential ingredients to string for writing to file)
 		String allergicIngredients = "";
 		
-		//get the glutencheckbox
 		CheckBox glutencb = (CheckBox)findViewById(R.id.glutencheckbox);
 		if(glutencb.isChecked()){
 			allergicIngredients += getString(R.string.gluten);	
+		}
+		CheckBox wheatcb = (CheckBox)findViewById(R.id.wheatcheckbox);
+		if(wheatcb.isChecked()){
+			allergicIngredients += getString(R.string.wheat);	
+		}
+		CheckBox nutscb = (CheckBox)findViewById(R.id.nutcheckbox);
+		if(wheatcb.isChecked()){
+			allergicIngredients += getString(R.string.nuts);	
+		}
+		CheckBox dairycb = (CheckBox)findViewById(R.id.dairycheckbox);
+		if(wheatcb.isChecked()){
+			allergicIngredients += getString(R.string.dairy);	
+		}
+		CheckBox shellfishcb = (CheckBox)findViewById(R.id.shellfishcheckbox);
+		if(shellfishcb.isChecked()){
+			allergicIngredients += getString(R.string.shellfish);
 		}
 		
 		FileOutputStream outputStream;

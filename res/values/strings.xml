@@ -19,6 +19,7 @@
 	<string name="gluten">wheat,barley,rye,oats,oatmeal,oat,flour,barley,yeast,cereal binding,chilton,couscous,criped rice,dinkle,bran,farina,farro,filler,malt,matzah,nuts</string>
 	<string name="wheat">flour,bran,bread,bulgur,cake,cereal extract,couscous,cracker,durum,farina,gluten,graham,pastry,phosphated</string>
 	<string name="nuts">arachis,nuts,peanut,peanuts,satay,beechnut,macadamia,cashew,pecan,sheanut,pistachio,pralines,pesto,goober,hypogaeic acid</string>
+	<string name="shellfish">abalone,clams,cockles,limpets,mussels,octopus,oysters,scallops,snails,squid,calimari,escargot,crab,crawfish,languistines,lobster,prawns,anaphylaxis,krill,crevette,scampi,ecrevisse,cuttlefish,surimi,glucosamine,bouillabaisse</string>
 
 
 </resources>

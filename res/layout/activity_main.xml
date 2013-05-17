@@ -26,7 +26,7 @@
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="30dp"
 	        android:onClick="enterUPC"
-	        android:text="Enter UPC" />
+	        android:text="Search for Product" />
 	
 	    <Button
 	        android:id="@+id/profileButton"

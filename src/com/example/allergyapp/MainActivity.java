@@ -95,29 +95,24 @@ public class MainActivity extends Activity {
         alert.show();
     }
 	
+    //method is run when scanner successfully scans a upc code
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		Log.d("MyApp", "result method");
 	    switch(requestCode) {
 	        case IntentIntegrator.REQUEST_CODE: {
 	            if (resultCode != RESULT_CANCELED) {
-	                IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+	                IntentResult scanResult = 
+	                IntentIntegrator
+	                .parseActivityResult(requestCode, resultCode, data);
 	                if (scanResult != null) {
+	                	
+	                	//get the scanned upc
 	                    String upc = scanResult.getContents();
-	                    //
-	                    //put whatever you want to do with the code here
-	                    System.out.println("Success: " + upc);
-	                    Log.d("MyApp", "Success: " + upc);
-	                    
-	                    Intent intent = new Intent(this, DisplayIngredients.class);
-	                    
 	                    String message = upc;
+	                    
+	                    //send the upc to the new activity
+	                    Intent intent = new Intent(this, DisplayIngredients.class);
 	                    intent.putExtra(EXTRA_MESSAGE, message);
 	                    startActivity(intent);
-	                    
-	                    //resultText = (TextView) findViewById(R.id.resultText);
-	                    //FactualRetrievalTask task = new FactualRetrievalTask();
-	                    //Query query = new Query().search(upc);
-	                    //task.execute(query);
 	                    
 	                }
 	            }

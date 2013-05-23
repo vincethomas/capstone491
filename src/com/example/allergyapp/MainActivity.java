@@ -1,6 +1,5 @@
 package com.example.allergyapp;
 // Remember to delete debug code
-import java.io.*;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,7 +9,6 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -23,7 +21,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		Log.d("ALLERGY APP", "Aplication Started");
 		setContentView(R.layout.activity_main);
 	}
 

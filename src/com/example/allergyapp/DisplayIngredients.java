@@ -171,7 +171,8 @@ public class DisplayIngredients extends Activity {
 						e.printStackTrace();
 					}
 				 }
-				 
+				 Log.d("ALLERGY APP", brand + " " + productname);
+				 Log.d("ALLERGY APP", items);
 				 //get user's allergy ingredients
 				 String userAllergies = getUserData();
 				 
@@ -238,7 +239,7 @@ public class DisplayIngredients extends Activity {
 				}
 				
 				//break for now as only using first result
-				 break;
+				 //break;
 				} 
 				break;
 			}

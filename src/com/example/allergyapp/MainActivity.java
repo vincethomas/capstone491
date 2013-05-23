@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -17,12 +18,37 @@ import android.view.View;
 public class MainActivity extends Activity {
 	
 	public final static String EXTRA_MESSAGE = "com.example.allergyapp.MESSAGE";
+	SharedPreferences mPrefs;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		firstRunPreferences();
 		Log.d("ALLERGY APP", "Aplication Started");
+		
 		setContentView(R.layout.activity_main);
+		if(getFirstRun()){
+			setRan();
+			setupProfile();
+		}
+		
+	}
+	
+	private void setupProfile(){
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+		alertDialogBuilder
+		.setMessage("Thank you for trying AllergyApp, Please setup your profile")
+		.setCancelable(false)
+		.setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
+				// if this button is clicked, close
+				// current activity
+				Intent intent = new Intent(MainActivity.this, Profile.class);
+		        startActivity(intent);
+			}
+		  });
+		AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
 	}
 
 	@Override
@@ -30,6 +56,24 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
+	}
+	
+	//sets up storage for the first ran information
+	private void firstRunPreferences(){
+		Context mContext = this.getApplicationContext();
+		mPrefs = mContext.getSharedPreferences("allergyAppPrefs",0);
+	}
+	
+	//sets if the application has been run yet
+	private void setRan(){
+		SharedPreferences.Editor edit = mPrefs.edit();
+		edit.putBoolean("firstRun", false);
+		edit.commit();
+	}
+	
+	//returns true, if this is the first time run
+	private boolean getFirstRun(){
+		return mPrefs.getBoolean("firstRun", true);
 	}
 
 

@@ -39,7 +39,7 @@
 	        android:layout_marginTop="30dp"
 	        android:onClick="profile"
 	        android:textColor="#f9f9f9"
-	        android:text="Profile" />
+	        android:text="Allergy Profile" />
 	    
 	    <Button
 	        android:id="@+id/historyButton"

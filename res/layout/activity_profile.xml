@@ -26,6 +26,7 @@
         android:layout_alignBottom="@+id/button1"
         android:layout_alignParentRight="true"
         android:layout_marginRight="22dp"
+        android:onClick="cancel"
         android:text="Cancel" />
 
     <Button

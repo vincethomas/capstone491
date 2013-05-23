@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import android.widget.CheckBox;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Build;
 
 public class Profile extends Activity {
@@ -20,10 +22,13 @@ public class Profile extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//TODO need something here to repopulate the checkboxes onload for user**********************************************
+
+		
 		setContentView(R.layout.activity_profile);
+		getUserData();
 		// Show the Up button in the action bar.
 		setupActionBar();
+		
 	}
 	
 	//must be public for button call
@@ -79,6 +84,7 @@ public class Profile extends Activity {
 		  outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
 		  outputStream.write(allergicIngredients.getBytes());
 		  outputStream.close();
+		  alert();
 		  if(allergiesString != null){
 			  //if a checkbox was checked save the string
 			  FileOutputStream os = openFileOutput(filenameCheckboxes, Context.MODE_PRIVATE);
@@ -89,6 +95,27 @@ public class Profile extends Activity {
 		} catch (Exception e) {
 		  e.printStackTrace();
 		}
+		
+	}
+	
+	private void alert(){
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+		alertDialogBuilder
+		.setMessage("Allergy Profile Saved.")
+		.setCancelable(false)
+		.setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
+				// if this button is clicked, close
+				// current activity
+				Profile.this.finish();
+			}
+		  });
+		AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+	}
+	
+	public void cancel(View v){
+		this.finish();
 	}
 	
 	private void getUserData() {
@@ -97,6 +124,7 @@ public class Profile extends Activity {
 		//get allergies from file and set checkboxes
 		try {
 			FileInputStream input = openFileInput(filename);
+			
 			String allergString = convertStreamToString(input);
 			
 			Log.d("ALLERGY APP", "getUserData: " + allergString);

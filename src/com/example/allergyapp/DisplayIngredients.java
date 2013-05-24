@@ -48,23 +48,10 @@ public class DisplayIngredients extends Activity {
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
-		
-		
-		 Intent intent = getIntent();
-		 String upc = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+		Intent intent = getIntent();
+		String upc = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 		 
-		 //TextView myText = (TextView) findViewById(R.id.helloworld);
-		 //myText.setText(upc);
-		
-		/*// Create the text view
-	    TextView textView = (TextView) findViewById(R.id.helloworld);
-	    textView.setTextSize(40);
-	    textView.setText(upc);
-
-	    // Set the text view as the activity layout
-	    setContentView(textView);*/
-	    
-	    //resultText = (TextView) findViewById(R.id.resultText);
+	    //create the query and execute the asyncronous retrieval task
         FactualRetrievalTask task = new FactualRetrievalTask();
         Query query = new Query().search(upc);
         task.execute(query);
@@ -105,48 +92,14 @@ public class DisplayIngredients extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	private String getUserData() {
-		String filename = "ALLERGYAPPDATA";
-		try {
-			FileInputStream input = openFileInput(filename);
-			String ingredients = convertStreamToString(input);
-			return ingredients;
-		} catch (Exception e) {
-			Log.d("ALLERGY APP", "Exception: " + e);
-			e.printStackTrace();
-			return null;
-		}
-	}
+
 	
-	private String convertStreamToString(InputStream is) throws Exception {
-	    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-	    StringBuilder sb = new StringBuilder();
-	    String line = null;
-	    while ((line = reader.readLine()) != null) {
-	      sb.append(line).append("\n");
-	    }
-	    return sb.toString();
-	}
-	
-	public String getResults (String ingredients, String allergies) {
-		String flaggedIngredients = "";
-		String[] ing = ingredients.split(",");
-		String[] all = allergies.split(",");
-		for (String a : all){
-			for (String i : ing){
-				i = i.toLowerCase().trim();
-				a = a.toLowerCase().trim();
-				if (a.equals(i) || i.contains(a)){
-					flaggedIngredients = flaggedIngredients + i + ",";
-				}
-			}
-		}
-		return flaggedIngredients;
-	}
-	
+	//asyncronous task that runs while looking up product info
 	protected class FactualRetrievalTask extends AsyncTask<Query, Integer, List<ReadResponse>> {
 		ProgressDialog mDialog;
 
+		//sets up loading icon so user understands what is going on
+		//loading dialogue does prevent user input
 		@Override
 		protected void onPreExecute(){
 			mDialog = new ProgressDialog(DisplayIngredients.this);
@@ -155,7 +108,7 @@ public class DisplayIngredients extends Activity {
 	        mDialog.show();
 		}
 		
-		
+		//this is the method that actually sends the query
 		@Override
 		protected List<ReadResponse> doInBackground(Query... params) {
 			List<ReadResponse> results = Lists.newArrayList();
@@ -169,31 +122,46 @@ public class DisplayIngredients extends Activity {
 		protected void onProgressUpdate(Integer... progress) {
 		}
 
+		//this method runs when results come back from factual
+		//this updates the text in the display ingredients activity
 		@Override
 		protected void onPostExecute(List<ReadResponse> responses) {
 			boolean foundProduct = false;
 			//eventually may change these from for loops to only reference first result, debating this though so leave for now
 			for (ReadResponse response : responses) {
 				for (Map<String, Object> product : response.getData()) {
+					
 				foundProduct=true;
-				//get the product name and brand
-				String brand = (String) product.get("brand");
-				String productname = (String) product.get("product_name");
 				
-				//test to make sure that the brand is being grabbed in case an error occours
-				Log.d("ALLERGY APP", brand);
+				//product information vars
+				String brand = "";
+				String productname = "";
+				JSONArray ingredients = new JSONArray();
 				
-				// Get the text view and set it to the brand and product name
+				//if product is found
+				foundProduct=true;
+				
+				//string for product items
+				String items = "";	
+				
+				
+				//get the product name, brand, and ingredients
+				if(product.get("brand") != null)
+					brand = (String) product.get("brand");
+				
+				if( product.get("product_name") != null)
+					productname = (String) product.get("product_name");
+				
+				if(product.get("ingredients")!= null)
+					ingredients = (JSONArray) product.get("ingredients");
+				
+				
+				//Get the text view and set it to the brand and product name
 				TextView productText = (TextView) findViewById(R.id.resultText);
 				productText.setText(brand + " " + productname);
 				 
-				 //this gets the ingredients for each product (it is given to us in a JSONArray)
-				 JSONArray ingredients = (JSONArray) product.get("ingredients");
 				 
-				 
-				 
-				 //run through the list of ingredients and add each on to a string
-				 String items = "";				 
+				 //run through the list of ingredients and add each on to a string	 
 				 for(int i = 0; i < ingredients.length(); i++){
 					 //I had to add a try catch loop to silence an error, yay
 					 try {
@@ -203,7 +171,8 @@ public class DisplayIngredients extends Activity {
 						e.printStackTrace();
 					}
 				 }
-				 
+				 Log.d("ALLERGY APP", brand + " " + productname);
+				 Log.d("ALLERGY APP", items);
 				 //get user's allergy ingredients
 				 String userAllergies = getUserData();
 				 
@@ -270,7 +239,7 @@ public class DisplayIngredients extends Activity {
 				}
 				
 				//break for now as only using first result
-				 break;
+				 //break;
 				} 
 				break;
 			}
@@ -297,6 +266,51 @@ public class DisplayIngredients extends Activity {
 				productText.setText("Product Not Found");
 			}
 		}//end of on post execute
+		
+		//method loads the user data from the saved file
+		//TODO check to make sure file exists
+		private String getUserData() {
+			String filename = "ALLERGYAPPDATA";
+			try {
+				FileInputStream input = openFileInput(filename);
+				String ingredients = convertStreamToString(input);
+				return ingredients;
+			} catch (Exception e) {
+				Log.d("ALLERGY APP", "Exception: " + e);
+				e.printStackTrace();
+				return null;
+			}
+		}
+		
+		//helper method for getting user data returns file data as string
+		private String convertStreamToString(InputStream is) throws Exception {
+		    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		    StringBuilder sb = new StringBuilder();
+		    String line = null;
+		    while ((line = reader.readLine()) != null) {
+		      sb.append(line).append("\n");
+		    }
+		    return sb.toString();
+		}
+		
+		//method for checking for igredients that match potential allergens and returning them as as string
+		public String getResults (String ingredients, String allergies) {
+			String flaggedIngredients = "";
+			if(allergies != null && allergies != "" && ingredients != null && ingredients != ""){
+				String[] ing = ingredients.split(",");
+				String[] all = allergies.split(",");
+				for (String a : all){
+					for (String i : ing){
+						i = i.toLowerCase().trim();
+						a = a.toLowerCase().trim();
+						if (a.equals(i) || i.contains(a)){
+							flaggedIngredients = flaggedIngredients + i + ",";
+						}
+					}
+				}
+			}
+			return flaggedIngredients;
+		}
 		
 		//class to fetch product image asyncronously
 		private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {

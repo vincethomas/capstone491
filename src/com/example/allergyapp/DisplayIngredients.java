@@ -239,7 +239,7 @@ public class DisplayIngredients extends Activity {
 				}
 				
 				//break for now as only using first result
-				 //break;
+				 break;
 				} 
 				break;
 			}

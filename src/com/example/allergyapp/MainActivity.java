@@ -1,6 +1,5 @@
 package com.example.allergyapp;
 // Remember to delete debug code
-import java.io.*;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -11,7 +10,6 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;

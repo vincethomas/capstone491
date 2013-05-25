@@ -89,9 +89,9 @@ public class MainActivity extends Activity {
     
 
     
-    //sends user to history activity
-    public void history(View view) {
-        Intent intent = new Intent(this, History.class);
+    //sends user to about activity
+    public void about(View view) {
+        Intent intent = new Intent(this, About.class);
         startActivity(intent);
     }
     

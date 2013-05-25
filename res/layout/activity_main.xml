@@ -48,9 +48,9 @@
 	        android:layout_below="@+id/profileButton"
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="30dp"
-	        android:onClick="history"
+	        android:onClick="about"
 	        android:textColor="#f9f9f9"
-	        android:text="History" />
+	        android:text="About" />
 	    
 
 	</LinearLayout>

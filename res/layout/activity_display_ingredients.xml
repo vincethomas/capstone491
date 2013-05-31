@@ -25,20 +25,38 @@
         android:textSize="30sp" />
     
     <TextView
-        android:id="@+id/flaggedList"
+        android:id="@+id/flaggedtitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/resultText"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textSize="25sp" />
+    
+    <TextView
+        android:id="@+id/flaggedList"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/flaggedtitle"
         android:layout_marginTop="20dp"
         android:text=""
         android:textColor="#C00000"
         android:textSize="20sp" />
     
     <TextView
-        android:id="@+id/ingredientList"
+        android:id="@+id/ingredientstitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/flaggedList"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textSize="25sp" />
+    
+    <TextView
+        android:id="@+id/ingredientList"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ingredientstitle"
         android:layout_marginTop="20dp"
         android:text=""
         android:textSize="20sp" />

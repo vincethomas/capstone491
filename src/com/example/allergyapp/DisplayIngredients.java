@@ -159,6 +159,14 @@ public class DisplayIngredients extends Activity {
 				//Get the text view and set it to the brand and product name
 				TextView productText = (TextView) findViewById(R.id.resultText);
 				productText.setText(brand + " " + productname);
+				
+				//set flagged title
+				TextView flaggedTitle = (TextView) findViewById(R.id.flaggedtitle);
+				flaggedTitle.setText("Flagged Ingredients");
+				
+				//set ingredients list title
+				TextView ingredientsTitle = (TextView) findViewById(R.id.ingredientstitle);
+				ingredientsTitle.setText("Other Ingredients");
 				 
 				 
 				 //run through the list of ingredients and add each on to a string	 
@@ -176,10 +184,22 @@ public class DisplayIngredients extends Activity {
 				 //get user's allergy ingredients
 				 String userAllergies = getUserData();
 				 
-				 //returns results equal in current ingredients and user's allergies
+				 //get string of flagged ingredients dileneated by commas
 				 String fr = getResults(items, userAllergies);
+				 
+				 //create a string for outputing ingredients
 				 String flaggedResults = "";
 				 String[] flaggedResultsArray = fr.split(",");
+				 
+				 //set product title background
+				 
+				 if(fr == ""){
+					 productText.setBackgroundResource(R.color.green);
+				 }else{
+					 productText.setBackgroundResource(R.color.red);
+				 }
+				 
+				 //WHAT DOES THIS DO DYLAN?????????????????????????????????????????????????????????????????????????????????????
 				 for (int i = 0; i < flaggedResultsArray.length; i++){
 					 if (!(flaggedResults.contains(flaggedResultsArray[i]))){
 						 flaggedResults = flaggedResults + flaggedResultsArray[i] + ", ";

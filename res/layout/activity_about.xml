@@ -65,7 +65,7 @@
         android:layout_alignLeft="@+id/textView6"
         android:layout_below="@+id/textView6"
         android:layout_marginTop="29dp"
-        android:text="Contact: allergyapp@gmail.com"
+        android:text="Contact: allergyapp.uw@gmail.com"
         android:autoLink="email"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 

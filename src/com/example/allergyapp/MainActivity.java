@@ -1,6 +1,8 @@
 package com.example.allergyapp;
 // Remember to delete debug code
 
+import java.io.File;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -24,27 +26,63 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		firstRunPreferences();
-		Log.d("ALLERGY APP", "Aplication Started");
-		
+		//Log.d("ALLERGY APP", "Aplication Started");
 		setContentView(R.layout.activity_main);
-		if(getFirstRun()){
-			setRan();
-			setupProfile();
+		
+		//check if profile needs to be setup
+		//must be run before as new alerts cover old alerts
+		File file = getBaseContext().getFileStreamPath("ALLERGYAPPDATA");
+		if(!file.exists()){
+			profileMessage();
 		}
+		
+		//display disclaimer if first run
+		if(getFirstRun()){
+			agreement();
+		}
+		
+		
 		
 	}
 	
-	private void setupProfile(){
+	//method that displays the setup profile alert when called
+	//sends the user to the profile page when ok is clicked
+	private void profileMessage(){
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 		alertDialogBuilder
-		.setMessage("Thank you for trying AllergyApp, Please setup your profile")
+		.setMessage("You have no allergies selected, please setup your allergy profile")
 		.setCancelable(false)
 		.setPositiveButton("Ok",new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog,int id) {
-				// if this button is clicked, close
-				// current activity
+				// if clicked run the profile activity
 				Intent intent = new Intent(MainActivity.this, Profile.class);
 		        startActivity(intent);
+			}
+		  });
+		AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+	}
+	
+	//method that displays the disclaimer
+	//either dismisses disclaimer or closes app depending on accept/decline
+	private void agreement(){
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+		alertDialogBuilder
+		.setMessage("By using allergy app, you acknowledge that the results that AllergyApp provides may not be accurate and that " +
+				"AllergyApp and the people associated with it are not liable for injury, illness, death or other consequences of utlizing the " +
+				"application.")
+		.setCancelable(false)
+		.setPositiveButton("Accept",new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
+				// if clicked save that app was run
+				setRan();
+			}
+		  })
+		.setNegativeButton("Decline",new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
+				// if this button is clicked, close
+				// app
+				MainActivity.this.finish();
 			}
 		  });
 		AlertDialog alert = alertDialogBuilder.create();

@@ -127,15 +127,15 @@ public class Profile extends Activity {
 			
 			String allergString = convertStreamToString(input);
 			
-			Log.d("ALLERGY APP", "getUserData: " + allergString);
+			//Log.d("ALLERGY APP", "getUserData: " + allergString);
 			
 			//turn allergies into array
 			String[] allergies = allergString.split(",");
 			for(String a : allergies){
 				
-				Log.d("ALLERGY APP", a);
+				//Log.d("ALLERGY APP", a);
 				int id = getResources().getIdentifier(a.trim(), "id", this.getPackageName());
-				Log.d("ALLERGY APP", ""+id);
+				//Log.d("ALLERGY APP", ""+id);
 				//Log.d("ALLERGY APP", "dariy id = " + R.id.dairycheckbox);
 				CheckBox cb = (CheckBox) findViewById(id);
 				
@@ -146,7 +146,7 @@ public class Profile extends Activity {
 			}
 			
 		} catch (Exception e) {
-				Log.d("ALLERGY APP", "Exception: " + e);
+				//Log.d("ALLERGY APP", "Exception: " + e);
 				e.printStackTrace();
 		}
 	}

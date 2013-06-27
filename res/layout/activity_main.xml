@@ -14,48 +14,46 @@
         <Button
             android:id="@+id/scanButton"
             android:layout_width="fill_parent"
-            android:layout_height="80dp"
+            android:layout_height="100dp"
             android:layout_marginTop="5dp"
             android:drawableLeft="@drawable/camera"
             android:onClick="scanBarcode"
-            android:textColor="#f9f9f9"
-            android:text="Scan Barcode" />
+            android:text="Scan Barcode"
+            android:textColor="#f9f9f9" />
 
-	    <Button
-	        android:id="@+id/upcButton"
-	        android:layout_width="200dp"
-	        android:layout_height="60dp"
-	        android:layout_centerHorizontal="true"
-	        android:drawableLeft="@drawable/search"
-	        android:layout_marginTop="30dp"
-	        android:onClick="enterUPC"
-	        android:textColor="#f9f9f9"
-	        android:text="Search for Product" />
-	
-	    <Button
-	        android:id="@+id/profileButton"
-	        android:layout_width="200dp"
-	        android:layout_height="60dp"
-	        android:layout_below="@+id/upcButton"
-	        android:layout_centerHorizontal="true"
-	        android:drawableLeft="@drawable/profile"
-	        android:layout_marginTop="30dp"
-	        android:onClick="profile"
-	        android:textColor="#f9f9f9"
-	        android:text="Allergy Profile" />
-	    
-	    <Button
-	        android:id="@+id/historyButton"
-	        android:layout_width="200dp"
-	        android:layout_height="60dp"
-	        android:layout_below="@+id/profileButton"
-	        android:layout_centerHorizontal="true"
-	        android:drawableLeft="@drawable/about"
-	        android:layout_marginTop="30dp"
-	        android:onClick="about"
-	        android:textColor="#f9f9f9"
-	        android:text="About" />
+        <Button
+            android:id="@+id/upcButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:drawableLeft="@drawable/search"
+            android:onClick="enterUPC"
+            android:text="Search for Product"
+            android:textColor="#f9f9f9" />
 
-	</LinearLayout>
+        <Button
+            android:id="@+id/profileButton"
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/upcButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:drawableLeft="@drawable/profile"
+            android:onClick="profile"
+            android:text="Allergy Profile"
+            android:textColor="#f9f9f9" />
+
+        <Button
+            android:id="@+id/historyButton"
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/profileButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:drawableLeft="@drawable/about"
+            android:onClick="about"
+            android:text="About"
+            android:textColor="#f9f9f9" />
+    </LinearLayout>
 
 </RelativeLayout>

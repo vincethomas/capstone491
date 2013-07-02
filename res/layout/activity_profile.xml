@@ -54,55 +54,97 @@
 	</LinearLayout> 
     -->
 
-    <CheckBox
-        android:id="@+id/glutencheckbox"
+   <CheckBox
+        android:id="@+id/dairycheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
         android:layout_marginTop="10dp"
-        android:text="Gluten"
-        android:textSize="30sp" />
-
-    <CheckBox
-        android:id="@+id/wheatcheckbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/glutencheckbox"
-        android:layout_below="@+id/glutencheckbox"
-        android:layout_marginTop="10dp"
-        android:textSize="30sp"
-        android:text="Wheat" />
-
-    <CheckBox
-        android:id="@+id/dairycheckbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/wheatcheckbox"
-        android:layout_below="@+id/wheatcheckbox"
-        android:layout_marginTop="10dp"
         android:textSize="30sp"
         android:text="Dairy" />
-
+   
     <CheckBox
-        android:id="@+id/shellfishcheckbox"
+        android:id="@+id/eggcheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/dairycheckbox"
         android:layout_below="@+id/dairycheckbox"
         android:layout_marginTop="10dp"
+        android:text="Egg"
+        android:textSize="30sp" />
+   
+    <CheckBox
+        android:id="@+id/fishcheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/eggcheckbox"
+        android:layout_below="@+id/eggcheckbox"
+        android:layout_marginTop="10dp"
+        android:text="Fish"
+        android:textSize="30sp" />
+    
+    <CheckBox
+        android:id="@+id/glutencheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fishcheckbox"
+        android:layout_below="@+id/fishcheckbox"
+        android:layout_marginTop="10dp"
+        android:text="Gluten"
+        android:textSize="30sp" />
+    
+    <CheckBox
+        android:id="@+id/peanutcheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/glutencheckbox"
+        android:layout_below="@+id/glutencheckbox"
+        android:layout_marginTop="10dp"
+        android:text="Peanut"
+        android:textSize="30sp" />
+    
+    <CheckBox
+        android:id="@+id/shellfishcheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/peanutcheckbox"
+        android:layout_below="@+id/peanutcheckbox"
+        android:layout_marginTop="10dp"
         android:textSize="30sp"
         android:text="Shellfish" />
-
+    
     <CheckBox
-        android:id="@+id/nutcheckbox"
+        android:id="@+id/soycheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/shellfishcheckbox"
         android:layout_below="@+id/shellfishcheckbox"
         android:layout_marginTop="10dp"
+        android:text="Soy"
+        android:textSize="30sp" />
+
+    <CheckBox
+        android:id="@+id/nutcheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/soycheckbox"
+        android:layout_below="@+id/soycheckbox"
+        android:layout_marginTop="10dp"
         android:textSize="30sp"
-        android:text="Nuts" />
+        android:text="Tree Nuts" />
+    
+    <!-- <CheckBox
+        android:id="@+id/wheatcheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/soycheckbox"
+        android:layout_below="@+id/soycheckbox"
+        android:layout_marginTop="10dp"
+        android:textSize="30sp"
+        android:text="Wheat" />  -->
+        
+    
 
 
 </RelativeLayout>

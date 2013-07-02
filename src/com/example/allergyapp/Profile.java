@@ -48,14 +48,14 @@ public class Profile extends Activity {
 			allergicIngredients += getString(R.string.gluten);
 			allergies.add("glutencheckbox");
 		}
-		CheckBox wheatcb = (CheckBox)findViewById(R.id.wheatcheckbox);
-		if(wheatcb.isChecked()){
-			allergicIngredients += getString(R.string.wheat);
-			allergies.add("wheatcheckbox");
-		}
+//		CheckBox wheatcb = (CheckBox)findViewById(R.id.wheatcheckbox);
+//		if(wheatcb.isChecked()){
+//			allergicIngredients += getString(R.string.wheat);
+//			allergies.add("wheatcheckbox");
+//		}
 		CheckBox nutscb = (CheckBox)findViewById(R.id.nutcheckbox);
 		if(nutscb.isChecked()){
-			allergicIngredients += getString(R.string.nuts);
+			allergicIngredients += getString(R.string.tree_nut);
 			allergies.add("nutcheckbox");
 		}
 		CheckBox dairycb = (CheckBox)findViewById(R.id.dairycheckbox);
@@ -63,12 +63,31 @@ public class Profile extends Activity {
 			allergicIngredients += getString(R.string.dairy);
 			allergies.add("dairycheckbox");
 		}
+		CheckBox fishcb = (CheckBox)findViewById(R.id.fishcheckbox);
+		if(fishcb.isChecked()){
+			allergicIngredients += getString(R.string.fish);
+			allergies.add("fishcheckbox");
+		}
 		CheckBox shellfishcb = (CheckBox)findViewById(R.id.shellfishcheckbox);
 		if(shellfishcb.isChecked()){
 			allergicIngredients += getString(R.string.shellfish);
 			allergies.add("shellfishcheckbox");
 		}
-		
+		CheckBox eggcb = (CheckBox)findViewById(R.id.eggcheckbox);
+		if(eggcb.isChecked()){
+			allergicIngredients += getString(R.string.egg);
+			allergies.add("eggcheckbox");
+		}
+		CheckBox peanutcb = (CheckBox)findViewById(R.id.peanutcheckbox);
+		if(peanutcb.isChecked()){
+			allergicIngredients += getString(R.string.peanut);
+			allergies.add("peanutcheckbox");
+		}
+		CheckBox soycb = (CheckBox)findViewById(R.id.soycheckbox);
+		if(soycb.isChecked()){
+			allergicIngredients += getString(R.string.soy);
+			allergies.add("soycheckbox");
+		}
 		//convert allergies arraylist to string to be saved
 		String allergiesString = null;
 		if(allergies.size() > 0){
